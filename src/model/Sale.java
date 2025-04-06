@@ -7,33 +7,45 @@ public class Sale {
     private int quantitySold;
     private LocalDateTime saleDate;
 
- public Sale(){
-     this.book = new Book();
- }
-
-public Sale(Book book, int quantitySold, LocalDateTime saleDate) {
-    this.book = book;
-    this.quantitySold = quantitySold;
-    this.saleDate = saleDate;
+    public Sale(Book book, int quantitySold, LocalDateTime saleDate) {
+        this.book = book;
+        this.quantitySold = quantitySold;
+        this.saleDate = saleDate;
     }
-}
 
-public Book getBook(){return Book}
+    public Sale(){
 
-public void setQuantitySold(int quantitySold){return this.quantitySold = quantitySold}
+    }
 
-public int getQuantitySold(){return quantitySold}
+    public void setBook(Book book) {
+        this.book = book;
+    }
 
-public void setSaleDate(LocalDateTime saleDate){
-    this.saleDate = saleDate;
-}
+    public Book getBook() {
+        return book;
+    }
 
-public LocalDateTime getSaleDate(){
-    return saleDate;
-}
+    public void setQuantitySold(int quantitySold) {
+        this.quantitySold = quantitySold;
+    }
 
-public void recordSale(){}
+    public int getQuantitySold() {
+        return quantitySold;
+    }
 
-public String displaySaleDetails(){
+    public void setSaleDate(LocalDateTime saleDate) {
+        this.saleDate = saleDate;
+    }
 
+    public LocalDateTime getSaleDate() {
+        return saleDate;
+    }
+
+    public String displaySaleDetails() {
+        return "{" +
+                "Id: " + book.getId() + "," +
+                " Libro: " + book.getTitle() + ","
+                + " Fecha: " + saleDate + ","
+                + " Cantidad: " + quantitySold + "}";
+    }
 }
