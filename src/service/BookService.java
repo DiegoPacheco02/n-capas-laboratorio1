@@ -24,5 +24,9 @@ public class BookService {
                 .orElse(null);
     }
 
-    //TODO: Definir functión getBooksWithMoreThanXSales
+    public List<Book> getBooksWithMoreThanXSales(int x) {
+        return books.stream()
+                .filter(book -> book.getTotalQuantitySold() > x)
+                .toList();
+    }
 }

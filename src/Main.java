@@ -26,7 +26,7 @@ public class Main {
                     showBestSellingBook();
                     break;
                 case 4:
-                    // TODO: Crear opción para mostrar libros con más de X ventas
+                    showBooksWithWithMoreThanXSales();
                     break;
                 default:
                     System.out.println("Opción no válida. Intente de nuevo.");
@@ -92,7 +92,7 @@ public class Main {
             Book bestSellingBook = bookService.getBestSellingBook();
             if (bestSellingBook != null) {
                 System.out.printf(
-                        "El libro más vendido es: %s, que se ha ventido %d veces%n",
+                        "El libro más vendido es: %s, que se ha vendido %d veces%n",
                         bestSellingBook,
                         bestSellingBook.getTotalQuantitySold());
             } else {
@@ -105,5 +105,21 @@ public class Main {
         }
     }
 
-    //TODO: Implementar la opción para mostrar libros con más de X ventas
+    private static void showBooksWithWithMoreThanXSales() {
+        try {
+            int x = getValueFromTerminal("Ingrese el numero de ventas minimo que desea consultar ", Integer.class);
+            if (x < 0)
+                throw new IllegalArgumentException("El numero de ventas no puede ser negativo");
+
+            bookService.getBooksWithMoreThanXSales(x)
+                    .forEach(book -> {
+                        System.out.printf("%s tiene %d ventas %n", book,
+                                book.getTotalQuantitySold());
+                    });
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error al mostrar los libros con mas de X ventas: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error inesperado: " + e.getMessage());
+        }
+    }
 }
