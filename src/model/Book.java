@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
@@ -7,7 +8,8 @@ public class Book {
     private String title;
     private String author;
     private Double price;
-    private List<Sale> sales;
+    private List<Sale> sales = new ArrayList<>();
+    private Integer totalQuantitySold = 0;
 
     public Book() {
     }
@@ -25,6 +27,8 @@ public class Book {
     }
 
     public void setId(Long id) {
+        if (id == null || id <= 0)
+            throw new IllegalArgumentException("El ID no puede ser nulo o menor o igual a cero");
         this.id = id;
     }
 
@@ -33,6 +37,8 @@ public class Book {
     }
 
     public void setTitle(String title) {
+        if (title == null || title.isEmpty())
+            throw new IllegalArgumentException("El título no puede ser nulo o vacío");
         this.title = title;
     }
 
@@ -41,6 +47,8 @@ public class Book {
     }
 
     public void setAuthor(String author) {
+        if (author == null || author.isEmpty())
+            throw new IllegalArgumentException("El autor no puede ser nulo o vacío");
         this.author = author;
     }
 
@@ -49,14 +57,28 @@ public class Book {
     }
 
     public void setPrice(Double price) {
+        if (price == null || price <= 0)
+            throw new IllegalArgumentException("El precio no puede ser nulo o menor o igual a cero");
         this.price = price;
     }
 
-    public void recordSale(Sale sale) {
+    public void addSale(Sale sale) {
+        if (sale == null)
+            throw new IllegalArgumentException("La venta no puede ser nula");
+        totalQuantitySold += sale.getQuantitySold();
         sales.add(sale);
     }
 
-    public void setSales(List<Sale> sales) {
-        this.sales = sales;
+    public List<Sale> getSales() {
+        return sales;
+    }
+
+    public Integer getTotalQuantitySold() {
+        return totalQuantitySold;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d - %s de %s, con un precio de $%.2f", id, title, author, price);
     }
 }
