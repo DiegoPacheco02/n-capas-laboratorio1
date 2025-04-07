@@ -16,6 +16,9 @@ public class Main {
             option = getOptionFromTerminal();
 
             switch (option) {
+                case 0:
+                    exit();
+                    break;
                 case 1:
                     addBook();
                     break;
@@ -49,6 +52,10 @@ public class Main {
             System.out.println("La opción debe ser un número entero.");
             return -1;
         }
+    }
+
+    private static void exit() {
+        System.out.println("Saliendo del programa.");
     }
 
     private static void addBook() {
